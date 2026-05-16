@@ -1,0 +1,26 @@
+backend:
+  name: git-gateway
+  branch: main
+
+local_backend: true
+
+media_folder: public/uploads
+public_folder: /uploads
+
+publish_mode: editorial_workflow
+
+collections:
+  - name: blog
+    label: Blog
+    folder: src/content/blog
+    create: true
+    slug: "{{slug}}"
+    extension: md
+    format: frontmatter
+    fields:
+      - { label: Título, name: title, widget: string }
+      - { label: Descrição, name: description, widget: text }
+      - { label: Data, name: pubDate, widget: datetime, date_format: YYYY-MM-DD, time_format: false }
+      - { label: Autor, name: author, widget: string, default: IZITech }
+      - { label: Destaque, name: featured, widget: boolean, default: false }
+      - { label: Conteúdo, name: body, widget: markdown }
