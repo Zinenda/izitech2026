@@ -1,0 +1,27 @@
+---
+const faqs = [
+  ["Que tipo de clientes a IZITech atende?", "What type of clients does IZITech serve?", "Prestamos serviços a empresas privadas, instituições públicas, ONGs, escritórios, restaurantes, gráficas, empresas de construção, prestadores de serviços e profissionais liberais.", "We serve private companies, public institutions, NGOs, offices, restaurants, print shops, construction companies, service providers, and independent professionals."],
+  ["Em que regiões a IZITech actua?", "Which regions does IZITech cover?", "A cobertura inclui a Cidade e Província de Tete, Cidade de Maputo, outras províncias de Moçambique e atendimento remoto nacional e internacional.", "Coverage includes the City and Province of Tete, Maputo City, other provinces of Mozambique, and national and international remote support."],
+  ["A IZITech trabalha com cloud e email corporativo?", "Does IZITech work with cloud and corporate email?", "Sim. Através da IZIHost, fornecemos hospedagem web, emails empresariais, Gmail Profissional, Microsoft Exchange, domínios, DNS, VPS, backups e migração de emails.", "Yes. Through IZIHost, we provide web hosting, business email, Professional Gmail, Microsoft Exchange, domains, DNS, VPS, backups, and email migration."],
+  ["Como começa um projecto tecnológico?", "How does a technology project start?", "Começamos por diagnóstico, análise das necessidades tecnológicas, definição de prioridades, proposta técnica e execução orientada à qualidade, segurança e continuidade operacional.", "We start with diagnosis, technology needs analysis, priority definition, a technical proposal, and execution focused on quality, security, and operational continuity."]
+];
+---
+
+<section id="faq" class="section-pad">
+  <div class="container-premium grid gap-10 lg:grid-cols-[.8fr_1.2fr]">
+    <h2 class="reveal text-4xl font-black sm:text-5xl" data-i18n="faq.title">Perguntas frequentes</h2>
+    <div class="grid gap-3">
+      {faqs.map(([qPt, qEn, aPt, aEn], index) => (
+        <article class="faq-item reveal rounded-3xl border border-line bg-white/[.035]">
+          <button class="faq-button flex w-full items-center justify-between gap-4 p-5 text-left text-lg font-black" type="button" aria-expanded={index === 0 ? "true" : "false"}>
+            <span data-pt={qPt} data-en={qEn}>{qPt}</span>
+            <span class="text-izired">+</span>
+          </button>
+          <div class:list={["faq-panel overflow-hidden px-5 pb-5 text-muted", index === 0 ? "" : "hidden"]}>
+            <p class="leading-7" data-pt={aPt} data-en={aEn}>{aPt}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,34 @@
+---
+const services = [
+  ["Consultoria Informática", "IT Consulting", "Planeamento estratégico de TI, auditoria tecnológica, diagnóstico de infraestruturas, transformação digital e análise de necessidades tecnológicas.", "IT strategic planning, technology audits, infrastructure diagnosis, digital transformation, and technology needs analysis."],
+  ["Desenvolvimento Web", "Web Development", "Websites institucionais, portais corporativos, lojas online, sistemas web personalizados, landing pages, SEO e manutenção.", "Institutional websites, corporate portals, online stores, custom web systems, landing pages, SEO, and maintenance."],
+  ["Design Gráfico e Branding", "Graphic Design & Branding", "Identidade visual, logótipos, material corporativo, design publicitário, flyers, brochuras, social media design e conteúdos visuais.", "Visual identity, logos, corporate materials, advertising design, flyers, brochures, social media design, and visual content."],
+  ["Infraestrutura e Redes", "Infrastructure & Networks", "Redes locais, servidores, redes empresariais, partilha de arquivos, impressoras em rede, NAS, TrueNAS e segurança de rede.", "Local networks, servers, enterprise networks, file sharing, network printers, NAS, TrueNAS, and network security."],
+  ["Cloud e Email Corporativo", "Cloud & Corporate Email", "Hospedagem web, emails empresariais, Gmail Profissional, Microsoft Exchange, domínios, DNS, VPS, backups e migração de emails.", "Web hosting, business email, Professional Gmail, Microsoft Exchange, domains, DNS, VPS, backups, and email migration."],
+  ["Sistemas de Gestão", "Business Management Systems", "Sistemas de facturação, gestão financeira, inventário, POS, Zoho Books, Zoho Inventory, Loyverse POS e sistemas personalizados.", "Billing systems, financial management, inventory, POS, Zoho Books, Zoho Inventory, Loyverse POS, and custom systems."],
+  ["Licenciamento Digital", "Digital Licensing", "Licenças digitais genuínas para Microsoft Windows, Microsoft Office, Kaspersky, sistemas de gestão e softwares corporativos.", "Genuine digital licenses for Microsoft Windows, Microsoft Office, Kaspersky, management systems, and corporate software."],
+  ["Assistência Técnica e Suporte", "Technical Assistance & Support", "Reparação, manutenção, suporte remoto, instalação de software, optimização de sistemas, recuperação de dados e contratos de suporte.", "Repair, maintenance, remote support, software installation, system optimization, data recovery, and support contracts."],
+  ["Inteligência Artificial e Automação", "Artificial Intelligence & Automation", "Consultoria em IA, automação de processos empresariais, integração de ferramentas inteligentes e fluxos orientados à produtividade.", "AI consulting, business process automation, intelligent tool integration, and productivity-focused workflows."]
+];
+---
+
+<section id="services" class="section-pad border-y border-line bg-[#080808]/80">
+  <div class="container-premium">
+    <div class="reveal max-w-3xl">
+      <h2 class="text-balance text-4xl font-black leading-tight sm:text-5xl" data-i18n="services.title">Áreas de actuação e serviços</h2>
+      <p class="mt-5 text-lg text-muted" data-i18n="services.copy">Disponibilizamos soluções integradas para empresas, instituições públicas, ONGs e clientes particulares.</p>
+    </div>
+    <div class="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+      {services.map(([titlePt, titleEn, copyPt, copyEn], index) => (
+        <article class="service-card reveal premium-card group p-6 transition duration-300 hover:-translate-y-1 hover:border-izired/50">
+          <div class="mb-9 flex items-center justify-between">
+            <span class="grid h-12 w-12 place-items-center rounded-2xl border border-izired/35 bg-izired/10 text-lg font-black text-white">{String(index + 1).padStart(2, "0")}</span>
+            <span class="h-2 w-2 rounded-full bg-izired opacity-60 transition group-hover:opacity-100"></span>
+          </div>
+          <h3 class="text-2xl font-black" data-pt={titlePt} data-en={titleEn}>{titlePt}</h3>
+          <p class="mt-4 leading-7 text-muted" data-pt={copyPt} data-en={copyEn}>{copyPt}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

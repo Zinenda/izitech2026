@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string"
+    },
+    "titleEn": {
+      "type": "string"
+    },
+    "category": {
+      "type": "string"
+    },
+    "summary": {
+      "type": "string"
+    },
+    "summaryEn": {
+      "type": "string"
+    },
+    "image": {
+      "type": "string"
+    },
+    "year": {
+      "type": "number"
+    },
+    "$schema": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "title",
+    "titleEn",
+    "category",
+    "summary",
+    "summaryEn",
+    "year"
+  ]
+}

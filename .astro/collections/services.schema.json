@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string"
+    },
+    "titleEn": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "descriptionEn": {
+      "type": "string"
+    },
+    "icon": {
+      "type": "string"
+    },
+    "order": {
+      "default": 1,
+      "type": "number"
+    },
+    "$schema": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "title",
+    "titleEn",
+    "description",
+    "descriptionEn"
+  ]
+}

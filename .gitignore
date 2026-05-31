@@ -1,6 +1,3 @@
-node_modules/
-dist/
-.astro/
-.netlify/
-.env
-.env.*
+# Local Netlify folder
+.netlify
+node_modules

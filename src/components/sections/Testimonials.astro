@@ -1,0 +1,27 @@
+---
+const testimonials = [
+  ["Soluções eficientes, seguras e adaptadas às necessidades específicas de cada cliente.", "Efficient, secure solutions adapted to each client's specific needs.", "Qualidade de serviço", "Service quality"],
+  ["Assistência técnica especializada, confidencialidade de dados e continuidade operacional.", "Specialized technical assistance, data confidentiality, and operational continuity.", "Suporte técnico", "Technical support"],
+  ["Relacionamento profissional de longo prazo, inovação tecnológica e melhoria contínua.", "Long-term professional relationships, technological innovation, and continuous improvement.", "Compromisso", "Commitment"]
+];
+---
+
+<section class="section-pad border-y border-line bg-[#080808]">
+  <div class="container-premium">
+    <h2 class="reveal max-w-3xl text-balance text-4xl font-black leading-tight sm:text-5xl" data-i18n="testimonials.title">Compromisso com qualidade e confiança</h2>
+    <div class="swiper izitech-swiper mt-12 overflow-hidden">
+      <div class="swiper-wrapper">
+        {testimonials.map(([pt, en, rolePt, roleEn]) => (
+          <article class="swiper-slide premium-card min-h-64 p-8">
+            <p class="text-2xl font-black leading-tight" data-pt={pt} data-en={en}>“{pt}”</p>
+            <p class="mt-8 text-sm font-black uppercase text-izired" data-pt={rolePt} data-en={roleEn}>{rolePt}</p>
+          </article>
+        ))}
+      </div>
+      <div class="mt-6 flex gap-3">
+        <button class="swiper-prev grid h-11 w-11 place-items-center rounded-full border border-line" type="button" aria-label="Previous testimonial">‹</button>
+        <button class="swiper-next grid h-11 w-11 place-items-center rounded-full border border-line" type="button" aria-label="Next testimonial">›</button>
+      </div>
+    </div>
+  </div>
+</section>

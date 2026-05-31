@@ -1,0 +1,16 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PortfolioGrid from "../components/portfolio/PortfolioGrid.astro";
+import Contact from "../components/sections/Contact.astro";
+---
+
+<BaseLayout title="Soluções IZITech" description="Conheça as áreas de solução da IZITech para consultoria, desenvolvimento web, cloud, infraestrutura, suporte técnico e automação.">
+  <section class="section-pad pt-40">
+    <div class="container-premium max-w-4xl">
+      <h1 class="text-balance text-5xl font-black leading-tight sm:text-7xl" data-i18n="portfolio.title">Soluções preparadas para a operação real</h1>
+      <p class="mt-6 text-xl leading-9 text-muted" data-i18n="portfolio.copy">Actuamos em consultoria, web, cloud, redes, sistemas, licenciamento, suporte técnico, design e automação.</p>
+    </div>
+  </section>
+  <PortfolioGrid />
+  <Contact />
+</BaseLayout>

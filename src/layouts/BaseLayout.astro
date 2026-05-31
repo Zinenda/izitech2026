@@ -1,29 +1,210 @@
 ---
-import '../styles.css';
+import Header from "../components/layout/Header.astro";
+import Footer from "../components/layout/Footer.astro";
+import "../styles/global.css";
 
-const { title = 'IZITech', description = 'Site Astro com Tailwind, Decap CMS e Netlify.' } = Astro.props;
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  canonical?: string;
+}
+
+const {
+  title = "IZITech - Tecnologias e Serviços",
+  description = "Empresa moçambicana de consultoria informática, suporte técnico, desenvolvimento web, cloud, email corporativo, design, sistemas empresariais e automação.",
+  image = "/icons/icon-512x512.png",
+  canonical = Astro.url.href
+} = Astro.props;
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "IZITech - Tecnologias e Serviços",
+  url: "https://izitech.co.mz",
+  logo: "https://izitech.co.mz/icons/icon-512x512.png",
+  sameAs: ["https://www.linkedin.com"],
+  contactPoint: {
+    "@type": "ContactPoint",
+    contactType: "sales",
+    email: "hello@izitech.co.mz",
+    availableLanguage: ["Portuguese", "English"]
+  },
+  serviceArea: "Mozambique"
+};
 ---
 
 <!doctype html>
-<html lang="pt">
+<html lang="pt" data-lang="pt">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
-    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    <meta name="description" content={description} />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href={canonical} />
+    <meta name="theme-color" content="#cc0000" />
+    <meta name="application-name" content="IZITech" />
+    <meta name="apple-mobile-web-app-title" content="IZITech" />
+    <meta name="msapplication-TileColor" content="#cc0000" />
+    <meta name="msapplication-config" content="/browserconfig.xml" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32" />
+    <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16" />
+    <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" sizes="180x180" />
+    <link rel="mask-icon" href="/icons/safari-pinned-tab.svg" color="#cc0000" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={new URL(image, Astro.site ?? Astro.url).href} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL(image, Astro.site ?? Astro.url).href} />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />
   </head>
   <body>
-    <slot />
+    <Header />
+    <main>
+      <slot />
+    </main>
+    <Footer />
     <script>
-      const identity = window.netlifyIdentity;
-      if (identity) {
-        identity.on('init', (user) => {
-          if (!user && window.location.hash.includes('invite_token')) {
-            identity.open('signup');
-          }
+      // @ts-nocheck
+      import { animate, stagger, inView } from "motion";
+      import { translations } from "../i18n/translations";
+
+      const stored = localStorage.getItem("izitech-lang");
+      const initialLang = stored === "en" || stored === "pt" ? stored : "pt";
+      const buttons = Array.from(document.querySelectorAll(".lang-btn"));
+
+      function applyLanguage(lang) {
+        document.documentElement.lang = lang;
+        document.documentElement.dataset.lang = lang;
+        localStorage.setItem("izitech-lang", lang);
+        buttons.forEach((button) => {
+          const isActive = button.dataset.lang === lang;
+          button.setAttribute("aria-pressed", String(isActive));
+          button.classList.toggle("bg-white", isActive);
+          button.classList.toggle("text-ink", isActive);
+          button.classList.toggle("text-white", false);
+          button.classList.toggle("text-muted", !isActive);
         });
+        document.querySelectorAll("[data-i18n]").forEach((node) => {
+          const key = node.getAttribute("data-i18n");
+          if (key && translations[lang]?.[key]) node.textContent = translations[lang][key];
+        });
+        document.querySelectorAll("[data-i18n-placeholder]").forEach((node) => {
+          const key = node.getAttribute("data-i18n-placeholder");
+          if (key && translations[lang]?.[key]) node.setAttribute("placeholder", translations[lang][key]);
+        });
+        document.querySelectorAll("[data-pt][data-en]").forEach((node) => {
+          const value = node.getAttribute(lang === "en" ? "data-en" : "data-pt");
+          if (value) node.textContent = value;
+        });
+        document.dispatchEvent(new CustomEvent("izitech:language", { detail: { lang } }));
       }
+
+      buttons.forEach((button) => button.addEventListener("click", () => applyLanguage(button.dataset.lang || "pt")));
+      applyLanguage(initialLang);
+
+      const toggle = document.querySelector(".mobile-toggle");
+      const menu = document.querySelector("#mobile-menu");
+      toggle?.addEventListener("click", () => {
+        const expanded = toggle.getAttribute("aria-expanded") === "true";
+        toggle.setAttribute("aria-expanded", String(!expanded));
+        menu?.classList.toggle("hidden", expanded);
+      });
+
+      inView(".reveal", (element) => {
+        element.classList.add("is-visible");
+      }, { margin: "0px 0px -10% 0px" });
+
+      animate(".hero-line", { opacity: [0, 1], y: [24, 0] }, { delay: stagger(0.08), duration: 0.7, easing: [0.2, 0.8, 0.2, 1] });
+
+      document.querySelectorAll(".faq-button").forEach((button) => {
+        button.addEventListener("click", () => {
+          const panel = button.parentElement?.querySelector(".faq-panel");
+          const expanded = button.getAttribute("aria-expanded") === "true";
+          button.setAttribute("aria-expanded", String(!expanded));
+          panel?.classList.toggle("hidden", expanded);
+        });
+      });
+
+      const modal = document.querySelector(".portfolio-modal");
+      const modalTitle = document.querySelector(".modal-title");
+      const modalSummary = document.querySelector(".modal-summary");
+      document.querySelectorAll(".portfolio-card").forEach((card) => {
+        card.addEventListener("click", () => {
+          const lang = localStorage.getItem("izitech-lang") === "en" ? "en" : "pt";
+          modalTitle.textContent = card.dataset[lang === "en" ? "titleEn" : "titlePt"] || "";
+          modalSummary.textContent = card.dataset[lang === "en" ? "summaryEn" : "summaryPt"] || "";
+          modal?.showModal();
+        });
+      });
+      document.querySelector(".modal-close")?.addEventListener("click", () => modal?.close());
+
+      document.querySelectorAll(".portfolio-filter").forEach((button) => {
+        button.addEventListener("click", () => {
+          const filter = button.dataset.filter || "All";
+          document.querySelectorAll(".portfolio-card").forEach((card) => {
+            card.classList.toggle("hidden", filter !== "All" && card.dataset.category !== filter);
+          });
+        });
+      });
+
+      const contactForm = document.querySelector(".contact-form");
+      contactForm?.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const lang = localStorage.getItem("izitech-lang") === "en" ? "en" : "pt";
+        const status = contactForm.querySelector(".form-status");
+        if (!contactForm.checkValidity()) {
+          status.textContent = translations[lang]["form.required"];
+          return;
+        }
+        const formData = new FormData(contactForm);
+        try {
+          await fetch("/", {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: new URLSearchParams(formData).toString()
+          });
+        } catch {
+          // Netlify captures the static form in production; local dev can still show confirmation.
+        }
+        status.textContent = translations[lang]["contact.success"];
+        contactForm.reset();
+      });
+    </script>
+    <script>
+      // @ts-nocheck
+      import Swiper from "swiper";
+      import { Navigation, Autoplay } from "swiper/modules";
+      import "swiper/css";
+      import "swiper/css/navigation";
+
+      new Swiper(".izitech-swiper", {
+        modules: [Navigation, Autoplay],
+        slidesPerView: 1,
+        spaceBetween: 18,
+        loop: true,
+        autoplay: { delay: 4800 },
+        navigation: {
+          nextEl: ".swiper-next",
+          prevEl: ".swiper-prev"
+        },
+        breakpoints: {
+          768: { slidesPerView: 2 },
+          1080: { slidesPerView: 3 }
+        }
+      });
     </script>
   </body>
 </html>

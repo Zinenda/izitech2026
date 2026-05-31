@@ -1,0 +1,37 @@
+<section id="contact" class="section-pad">
+  <div class="container-premium grid gap-10 lg:grid-cols-[.9fr_1.1fr]">
+    <div class="reveal">
+      <h2 class="text-balance text-4xl font-black leading-tight sm:text-5xl" data-i18n="contact.title">Fale com a IZITech</h2>
+      <p class="mt-5 text-lg leading-8 text-muted" data-i18n="contact.copy">
+        Conte-nos a necessidade tecnológica da sua empresa, instituição ou projecto. Podemos apoiar com diagnóstico, proposta técnica, implementação e suporte presencial ou remoto.
+      </p>
+      <div class="mt-8 grid gap-3 text-sm text-muted">
+        <a href="mailto:hello@izitech.co.mz">hello@izitech.co.mz</a>
+        <span>Bairro Francisco Manyanga, Cidade de Tete - Moçambique</span>
+        <span data-pt="Atendimento presencial e remoto" data-en="On-site and remote support">Atendimento presencial e remoto</span>
+      </div>
+    </div>
+    <form class="contact-form premium-card reveal grid gap-4 p-6 sm:p-8" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="contact" />
+      <p class="hidden"><label>Do not fill this out <input name="bot-field" /></label></p>
+      <label class="grid gap-2 text-sm font-bold text-mist">
+        <span data-i18n="contact.name">Nome</span>
+        <input class="rounded-2xl border border-line bg-black/30 px-4 py-3 text-white outline-none transition focus:border-izired" name="name" required data-i18n-placeholder="contact.name" placeholder="Nome" />
+      </label>
+      <label class="grid gap-2 text-sm font-bold text-mist">
+        <span data-i18n="contact.email">Email</span>
+        <input class="rounded-2xl border border-line bg-black/30 px-4 py-3 text-white outline-none transition focus:border-izired" type="email" name="email" required data-i18n-placeholder="contact.email" placeholder="Email" />
+      </label>
+      <label class="grid gap-2 text-sm font-bold text-mist">
+        <span data-i18n="contact.company">Empresa</span>
+        <input class="rounded-2xl border border-line bg-black/30 px-4 py-3 text-white outline-none transition focus:border-izired" name="company" data-i18n-placeholder="contact.company" placeholder="Empresa" />
+      </label>
+      <label class="grid gap-2 text-sm font-bold text-mist">
+        <span data-i18n="contact.message">Mensagem</span>
+        <textarea class="min-h-36 rounded-2xl border border-line bg-black/30 px-4 py-3 text-white outline-none transition focus:border-izired" name="message" required data-i18n-placeholder="contact.message" placeholder="Mensagem"></textarea>
+      </label>
+      <button class="btn btn-primary justify-self-start" type="submit" data-i18n="contact.submit">Enviar mensagem</button>
+      <p class="form-status text-sm font-bold text-izired" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+</section>

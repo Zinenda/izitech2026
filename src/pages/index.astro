@@ -1,74 +1,20 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import { getCollection } from 'astro:content';
-
-const posts = (await getCollection('blog'))
-  .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime())
-  .slice(0, 3);
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Hero from "../components/sections/Hero.astro";
+import About from "../components/sections/About.astro";
+import Services from "../components/sections/Services.astro";
+import PortfolioGrid from "../components/portfolio/PortfolioGrid.astro";
+import Testimonials from "../components/sections/Testimonials.astro";
+import FAQ from "../components/sections/FAQ.astro";
+import Contact from "../components/sections/Contact.astro";
 ---
 
-<BaseLayout title="IZITech | Astro + Netlify CMS" description="Projeto web Astro com Tailwind CSS, Decap CMS e deploy na Netlify.">
-  <Header />
-  <main>
-    <section class="bg-white">
-      <div class="mx-auto grid min-h-[78vh] max-w-6xl items-center gap-10 px-5 py-16 md:grid-cols-[1.05fr_0.95fr]">
-        <div>
-          <h1 class="max-w-3xl text-5xl font-black leading-[1.02] tracking-normal text-ink md:text-7xl">
-            Um site rápido, editável e pronto para publicar.
-          </h1>
-          <p class="mt-6 max-w-2xl text-lg leading-8 text-slate-600">
-            Astro entrega performance, Tailwind acelera a interface, Decap CMS dá autonomia editorial e Netlify cuida do deploy.
-          </p>
-          <div class="mt-8 flex flex-wrap gap-3">
-            <a class="rounded-md bg-brand px-5 py-3 text-sm font-bold text-white shadow-sm transition hover:bg-brand-dark" href="/blog">
-              Ver blog
-            </a>
-            <a class="rounded-md border border-slate-300 px-5 py-3 text-sm font-bold text-ink transition hover:border-brand hover:text-brand" href="/admin">
-              Abrir CMS
-            </a>
-          </div>
-        </div>
-        <div class="relative overflow-hidden rounded-lg border border-slate-200 bg-paper p-6 shadow-sm">
-          <div class="grid gap-4">
-            <div class="rounded-md bg-white p-5 shadow-sm">
-              <p class="text-sm font-bold text-brand">Stack</p>
-              <p class="mt-2 text-2xl font-black text-ink">Astro + Tailwind + Decap CMS</p>
-            </div>
-            <div class="grid grid-cols-2 gap-4">
-              <div class="rounded-md bg-white p-5">
-                <p class="text-3xl font-black text-sun">98</p>
-                <p class="mt-1 text-sm text-slate-500">Performance pronta para estático</p>
-              </div>
-              <div class="rounded-md bg-white p-5">
-                <p class="text-3xl font-black text-brand">/admin</p>
-                <p class="mt-1 text-sm text-slate-500">Painel editorial integrado</p>
-              </div>
-            </div>
-            <div class="rounded-md bg-ink p-5 text-white">
-              <p class="text-sm text-slate-300">Deploy</p>
-              <p class="mt-2 font-mono text-sm">npm run build → dist → Netlify</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="border-y border-slate-200 bg-paper py-16">
-      <div class="mx-auto max-w-6xl px-5">
-        <h2 class="text-3xl font-black text-ink">Publicações recentes</h2>
-        <div class="mt-8 grid gap-5 md:grid-cols-3">
-          {posts.map((post) => (
-            <a class="rounded-lg border border-slate-200 bg-white p-5 shadow-sm transition hover:-translate-y-1 hover:border-brand hover:shadow-md" href={`/blog/${post.id}`}>
-              <p class="text-sm font-bold text-brand">{post.data.pubDate.toLocaleDateString('pt-PT')}</p>
-              <h3 class="mt-3 text-xl font-black text-ink">{post.data.title}</h3>
-              <p class="mt-3 text-sm leading-6 text-slate-600">{post.data.description}</p>
-            </a>
-          ))}
-        </div>
-      </div>
-    </section>
-  </main>
-  <Footer />
+<BaseLayout title="IZITech - Tecnologias e Serviços em Moçambique" description="Consultoria informática, suporte técnico, desenvolvimento web, cloud, email corporativo, sistemas empresariais, design gráfico e automação para empresas em Moçambique.">
+  <Hero />
+  <About />
+  <Services />
+  <PortfolioGrid />
+  <Testimonials />
+  <FAQ />
+  <Contact />
 </BaseLayout>

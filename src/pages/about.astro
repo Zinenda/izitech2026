@@ -1,0 +1,16 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import About from "../components/sections/About.astro";
+import Testimonials from "../components/sections/Testimonials.astro";
+---
+
+<BaseLayout title="Sobre a IZITech" description="Conheça a IZITech, empresa moçambicana fundada em Tete em 2017 para prestar serviços tecnológicos, suporte informático e soluções digitais.">
+  <section class="section-pad pt-40">
+    <div class="container-premium max-w-4xl">
+      <h1 class="text-balance text-5xl font-black leading-tight sm:text-7xl" data-i18n="about.title">Empresa moçambicana de tecnologia e serviços digitais</h1>
+      <p class="mt-6 text-xl leading-9 text-muted" data-i18n="about.copy">Fundada na Cidade de Tete, a IZITech surgiu para apoiar pequenas, médias e grandes organizações na modernização dos seus processos tecnológicos, com soluções profissionais, inovadoras, acessíveis e adaptadas à realidade empresarial moçambicana.</p>
+    </div>
+  </section>
+  <About />
+  <Testimonials />
+</BaseLayout>

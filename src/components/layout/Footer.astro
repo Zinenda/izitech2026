@@ -1,0 +1,44 @@
+---
+const year = new Date().getFullYear();
+const links = [
+  ["nav.about", "/about"],
+  ["nav.services", "/services"],
+  ["nav.portfolio", "/portfolio"],
+  ["nav.blog", "/blog"],
+  ["nav.contact", "/contact"]
+];
+---
+
+<footer class="border-t border-line bg-[#070707] py-12">
+  <div class="container-premium grid gap-10 md:grid-cols-[1.2fr_.8fr_.8fr]">
+    <div>
+      <a href="/" class="flex items-center gap-3" aria-label="IZITech home">
+        <span class="grid h-12 w-12 place-items-center rounded-full bg-izired shadow-[0_12px_28px_rgba(204,0,0,.28)] ring-1 ring-white/15">
+          <img src="/logoIZI-inverse.svg" alt="" class="h-8 w-8" width="32" height="32" loading="lazy" />
+        </span>
+        <span class="text-base font-black uppercase">IZITech</span>
+      </a>
+      <p class="mt-5 max-w-md text-sm leading-7 text-muted" data-i18n="footer.copy">
+        Consultoria informática, soluções digitais, suporte técnico, desenvolvimento web, cloud, email corporativo, design e automação.
+      </p>
+    </div>
+    <div>
+      <h2 class="text-sm font-black uppercase text-white">Links</h2>
+      <div class="mt-4 grid gap-3">
+        {links.map(([key, href]) => <a class="text-sm text-muted hover:text-white" href={href} data-i18n={key}>{key}</a>)}
+      </div>
+    </div>
+    <div>
+      <h2 class="text-sm font-black uppercase text-white">Social</h2>
+      <div class="mt-4 grid gap-3 text-sm text-muted">
+        <a href="https://www.linkedin.com" rel="noreferrer" target="_blank">LinkedIn</a>
+        <a href="https://www.facebook.com" rel="noreferrer" target="_blank">Facebook</a>
+        <a href="mailto:hello@izitech.co.mz">hello@izitech.co.mz</a>
+        <span>Cidade de Tete, Moçambique</span>
+      </div>
+    </div>
+  </div>
+  <div class="container-premium mt-10 border-t border-line pt-6 text-center text-xs text-muted">
+    © {year} IZITech – Technologies e Serviços. All rights reserved.
+  </div>
+</footer>
