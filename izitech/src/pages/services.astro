@@ -1,0 +1,18 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Services from "../components/sections/Services.astro";
+import FAQ from "../components/sections/FAQ.astro";
+import Contact from "../components/sections/Contact.astro";
+---
+
+<BaseLayout title="IZITech Services" description="Web development, cloud and email, infrastructure, AI automation, business systems, branding and design.">
+  <section class="section-pad pt-40">
+    <div class="container-premium max-w-4xl">
+      <h1 class="text-balance text-5xl font-black leading-tight sm:text-7xl" data-i18n="services.title">Serviços para equipas que precisam de tecnologia fiável</h1>
+      <p class="mt-6 text-xl leading-9 text-muted" data-i18n="services.copy">Da estratégia à operação, estruturamos cada camada digital da empresa.</p>
+    </div>
+  </section>
+  <Services />
+  <FAQ />
+  <Contact />
+</BaseLayout>

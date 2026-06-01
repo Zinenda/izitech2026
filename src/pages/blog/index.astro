@@ -17,7 +17,7 @@ const posts = (await getCollection("blog")).sort((a, b) => b.data.pubDate.valueO
       ) : (
         <div class="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           {posts.map((post) => (
-            <article class="premium-card p-6">
+            <article class="premium-card magic-card p-6">
               <p class="text-xs font-black uppercase text-izired">{post.data.category}</p>
               <h2 class="mt-5 text-2xl font-black" data-pt={post.data.title} data-en={post.data.titleEn}>{post.data.title}</h2>
               <p class="mt-4 leading-7 text-muted" data-pt={post.data.description} data-en={post.data.descriptionEn}>{post.data.description}</p>

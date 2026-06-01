@@ -1,0 +1,95 @@
+---
+interface Props {
+  count?: number;
+  color?: string;
+  blur?: number;
+  speed?: number;
+  length?: string;
+  class?: string;
+}
+
+const {
+  count = 7,
+  color = "rgba(204, 0, 0, 0.28)",
+  blur = 42,
+  speed = 14,
+  length = "70vh",
+  class: className = ""
+} = Astro.props;
+
+const cycleDuration = Math.max(speed, 0.1);
+const rays = Array.from({ length: Math.max(count, 0) }, (_, index) => {
+  const left = 8 + Math.random() * 84;
+  const rotate = -28 + Math.random() * 56;
+  const width = 160 + Math.random() * 160;
+  const swing = 0.8 + Math.random() * 1.8;
+  const delay = Math.random() * cycleDuration;
+  const duration = cycleDuration * (0.75 + Math.random() * 0.5);
+  const intensity = 0.52 + Math.random() * 0.34;
+
+  return {
+    id: `${index}-${Math.round(left * 10)}`,
+    style: [
+      `--ray-left: ${left}%`,
+      `--ray-width: ${width}px`,
+      `--ray-rotate: ${rotate}deg`,
+      `--ray-rotate-start: ${rotate - swing}deg`,
+      `--ray-rotate-end: ${rotate + swing}deg`,
+      `--ray-duration: ${duration}s`,
+      `--ray-delay: ${delay}s`,
+      `--ray-intensity: ${intensity}`
+    ].join("; ")
+  };
+});
+---
+
+<div
+  class:list={["light-rays pointer-events-none absolute inset-0 isolate overflow-hidden rounded-[inherit]", className]}
+  style={`--light-rays-color: ${color}; --light-rays-blur: ${blur}px; --light-rays-length: ${length};`}
+  aria-hidden="true"
+>
+  <div class="absolute inset-0 overflow-hidden">
+    <div class="light-rays-glow light-rays-glow-left absolute inset-0 opacity-60"></div>
+    <div class="light-rays-glow light-rays-glow-right absolute inset-0 opacity-50"></div>
+    {rays.map((ray) => <div class="light-ray" style={ray.style} data-ray-id={ray.id}></div>)}
+  </div>
+</div>
+
+<style>
+  .light-rays-glow-left {
+    background: radial-gradient(circle at 18% 10%, color-mix(in srgb, var(--light-rays-color) 58%, transparent), transparent 68%);
+  }
+
+  .light-rays-glow-right {
+    background: radial-gradient(circle at 78% 0%, color-mix(in srgb, var(--light-rays-color) 42%, transparent), transparent 72%);
+  }
+
+  .light-ray {
+    position: absolute;
+    top: -14%;
+    left: var(--ray-left);
+    width: var(--ray-width);
+    height: var(--light-rays-length);
+    transform: translateX(-50%) rotate(var(--ray-rotate));
+    transform-origin: top;
+    border-radius: 999px;
+    background: linear-gradient(to bottom, color-mix(in srgb, var(--light-rays-color) 88%, transparent), transparent);
+    filter: blur(var(--light-rays-blur));
+    mix-blend-mode: screen;
+    opacity: 0;
+    animation: izitech-light-ray var(--ray-duration) ease-in-out var(--ray-delay) infinite;
+  }
+
+  @keyframes izitech-light-ray {
+    0%,
+    100% {
+      opacity: 0;
+      transform: translateX(-50%) rotate(var(--ray-rotate-start));
+    }
+
+    45% {
+      opacity: var(--ray-intensity);
+      transform: translateX(-50%) rotate(var(--ray-rotate-end));
+    }
+  }
+</style>

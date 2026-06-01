@@ -7,8 +7,8 @@ publish_mode: editorial_workflow
 media_folder: public/images/uploads
 public_folder: /images/uploads
 
-site_url: https://izitech.co.mz
-display_url: https://izitech.co.mz
+site_url: https://izitech.co
+display_url: https://izitech.co
 logo_url: /favicon.svg
 
 collections:

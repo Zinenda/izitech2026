@@ -22,6 +22,7 @@
 }
 
 html {
+  overflow-x: hidden;
   scroll-behavior: smooth;
   background: #050505;
 }
@@ -29,6 +30,7 @@ html {
 body {
   margin: 0;
   min-height: 100vh;
+  overflow-x: hidden;
   background:
     radial-gradient(circle at 70% 10%, rgba(204, 0, 0, .18), transparent 28rem),
     radial-gradient(circle at 10% 35%, rgba(255, 255, 255, .06), transparent 20rem),
@@ -93,12 +95,80 @@ img {
 }
 
 .premium-card {
+  position: relative;
+  overflow: hidden;
   border: 1px solid #262626;
   border-radius: 24px;
   background:
     linear-gradient(145deg, rgba(255, 255, 255, .055), transparent 34%),
     #111111;
   box-shadow: 0 24px 80px rgba(0, 0, 0, .34);
+}
+
+.magic-card {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  --magic-x: 50%;
+  --magic-y: 0%;
+  --magic-gradient-size: 260px;
+}
+
+.magic-card::before,
+.magic-card::after {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  content: "";
+  opacity: 0;
+  transition: opacity .28s var(--ease-premium);
+}
+
+.magic-card::before {
+  z-index: 2;
+  padding: 1px;
+  background:
+    radial-gradient(
+      var(--magic-gradient-size) circle at var(--magic-x) var(--magic-y),
+      rgba(255, 92, 92, .72),
+      rgba(204, 0, 0, .34) 34%,
+      transparent 68%
+    );
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+}
+
+.magic-card::after {
+  z-index: -1;
+  background:
+    radial-gradient(
+      var(--magic-gradient-size) circle at var(--magic-x) var(--magic-y),
+      rgba(204, 0, 0, .18),
+      rgba(255, 255, 255, .045) 36%,
+      transparent 70%
+    );
+}
+
+.magic-card:hover::before,
+.magic-card:hover::after {
+  opacity: 1;
+}
+
+.magic-card > :not(.light-rays) {
+  position: relative;
+  z-index: 1;
+}
+
+.magic-card > .light-rays {
+  position: absolute;
+  z-index: 0;
 }
 
 .red-glow {

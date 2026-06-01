@@ -1,0 +1,89 @@
+<div class="izitech-pointer" aria-hidden="true">
+  <svg viewBox="0 0 16 16" width="28" height="28" xmlns="http://www.w3.org/2000/svg">
+    <path d="M14.082 2.182a.5.5 0 0 1 .103.557L8.528 15.467a.5.5 0 0 1-.917-.007L5.57 10.694.803 8.652a.5.5 0 0 1-.006-.916l12.728-5.657a.5.5 0 0 1 .556.103z" />
+  </svg>
+</div>
+
+<script is:inline>
+  const pointer = document.querySelector(".izitech-pointer");
+  const canUsePointer = window.matchMedia("(pointer: fine)").matches && !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (pointer && canUsePointer) {
+    let pointerX = 0;
+    let pointerY = 0;
+    let currentX = 0;
+    let currentY = 0;
+    let raf = 0;
+
+    document.documentElement.classList.add("izitech-pointer-enabled");
+
+    const animatePointer = () => {
+      currentX += (pointerX - currentX) * 0.28;
+      currentY += (pointerY - currentY) * 0.28;
+      pointer.style.transform = `translate3d(${currentX}px, ${currentY}px, 0) rotate(-70deg)`;
+      raf = requestAnimationFrame(animatePointer);
+    };
+
+    const showPointer = () => pointer.classList.add("is-visible");
+    const hidePointer = () => pointer.classList.remove("is-visible");
+
+    document.addEventListener("pointermove", (event) => {
+      pointerX = event.clientX;
+      pointerY = event.clientY;
+      showPointer();
+      if (!raf) raf = requestAnimationFrame(animatePointer);
+    });
+
+    document.addEventListener("pointerleave", hidePointer);
+    document.addEventListener("pointerenter", showPointer);
+  }
+</script>
+
+<style>
+  .izitech-pointer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    width: 28px;
+    height: 28px;
+    pointer-events: none;
+    opacity: 0;
+    transform: translate3d(-999px, -999px, 0) rotate(-70deg);
+    transform-origin: 30% 24%;
+    transition: opacity .16s var(--ease-premium);
+    will-change: transform, opacity;
+  }
+
+  .izitech-pointer.is-visible {
+    opacity: 1;
+  }
+
+  .izitech-pointer svg {
+    display: block;
+    overflow: visible;
+    color: #cc0000;
+    filter: drop-shadow(0 8px 18px rgba(204, 0, 0, .42));
+  }
+
+  .izitech-pointer path {
+    fill: currentColor;
+    stroke: rgba(255, 255, 255, .92);
+    stroke-width: 1.35;
+  }
+
+  @media (pointer: fine) and (prefers-reduced-motion: no-preference) {
+    :global(html.izitech-pointer-enabled),
+    :global(html.izitech-pointer-enabled *),
+    :global(html.izitech-pointer-enabled *::before),
+    :global(html.izitech-pointer-enabled *::after) {
+      cursor: none;
+    }
+
+    :global(html.izitech-pointer-enabled input),
+    :global(html.izitech-pointer-enabled textarea),
+    :global(html.izitech-pointer-enabled [contenteditable="true"]) {
+      cursor: text;
+    }
+  }
+</style>

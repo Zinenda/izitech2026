@@ -1,6 +1,7 @@
 ---
 import Header from "../components/layout/Header.astro";
 import Footer from "../components/layout/Footer.astro";
+import Pointer from "../components/ui/Pointer.astro";
 import "../styles/global.css";
 
 interface Props {
@@ -21,13 +22,14 @@ const schema = {
   "@context": "https://schema.org",
   "@type": "Organization",
   name: "IZITech - Tecnologias e Serviços",
-  url: "https://izitech.co.mz",
-  logo: "https://izitech.co.mz/icons/icon-512x512.png",
-  sameAs: ["https://www.linkedin.com"],
+  url: "https://izitech.co",
+  logo: "https://izitech.co/icons/icon-512x512.png",
+  sameAs: ["https://www.instagram.com/izi_technologies/", "https://www.facebook.com/izitec/"],
   contactPoint: {
     "@type": "ContactPoint",
     contactType: "sales",
-    email: "hello@izitech.co.mz",
+    telephone: "+258878790215",
+    email: "hello@izitech.co",
     availableLanguage: ["Portuguese", "English"]
   },
   serviceArea: "Mozambique"
@@ -76,6 +78,7 @@ const schema = {
       <slot />
     </main>
     <Footer />
+    <Pointer />
     <script>
       // @ts-nocheck
       import { animate, stagger, inView } from "motion";
@@ -121,6 +124,40 @@ const schema = {
         const expanded = toggle.getAttribute("aria-expanded") === "true";
         toggle.setAttribute("aria-expanded", String(!expanded));
         menu?.classList.toggle("hidden", expanded);
+      });
+
+      function scrollToHash(hash) {
+        const target = hash ? document.querySelector(hash) : document.body;
+        if (!target) return false;
+        const headerOffset = 96;
+        const top = target === document.body ? 0 : target.getBoundingClientRect().top + window.scrollY - headerOffset;
+        window.scrollTo({ top: Math.max(top, 0), behavior: "smooth" });
+        return true;
+      }
+
+      document.querySelectorAll('a[href^="/#"], a[href^="#"]').forEach((link) => {
+        link.addEventListener("click", (event) => {
+          const href = link.getAttribute("href") || "";
+          const url = new URL(href, window.location.href);
+          if (url.pathname !== window.location.pathname) return;
+          if (!scrollToHash(url.hash)) return;
+          event.preventDefault();
+          history.pushState(null, "", url.hash || window.location.pathname);
+          toggle?.setAttribute("aria-expanded", "false");
+          menu?.classList.add("hidden");
+        });
+      });
+
+      if (window.location.hash) {
+        requestAnimationFrame(() => scrollToHash(window.location.hash));
+      }
+
+      document.querySelectorAll(".magic-card").forEach((card) => {
+        card.addEventListener("pointermove", (event) => {
+          const rect = card.getBoundingClientRect();
+          card.style.setProperty("--magic-x", `${event.clientX - rect.left}px`);
+          card.style.setProperty("--magic-y", `${event.clientY - rect.top}px`);
+        });
       });
 
       inView(".reveal", (element) => {

@@ -12,7 +12,7 @@ const faqs = [
     <h2 class="reveal text-4xl font-black sm:text-5xl" data-i18n="faq.title">Perguntas frequentes</h2>
     <div class="grid gap-3">
       {faqs.map(([qPt, qEn, aPt, aEn], index) => (
-        <article class="faq-item reveal rounded-3xl border border-line bg-white/[.035]">
+        <article class="faq-item reveal magic-card rounded-3xl border border-line bg-white/[.035]">
           <button class="faq-button flex w-full items-center justify-between gap-4 p-5 text-left text-lg font-black" type="button" aria-expanded={index === 0 ? "true" : "false"}>
             <span data-pt={qPt} data-en={qEn}>{qPt}</span>
             <span class="text-izired">+</span>

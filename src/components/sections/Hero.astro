@@ -1,9 +1,14 @@
+---
+import LightRays from "../ui/LightRays.astro";
+---
+
 <section class="relative flex min-h-screen items-center overflow-hidden pt-28">
   <div class="absolute inset-0 -z-10 bg-[linear-gradient(135deg,rgba(204,0,0,.16),transparent_32%),linear-gradient(180deg,#050505_0%,#0b0505_100%)]"></div>
   <div class="container-premium pb-10">
-    <div class="grid items-center gap-8 rounded-[2rem] border border-white/[.08] bg-white/[.035] p-5 shadow-[0_30px_100px_rgba(0,0,0,.42)] backdrop-blur-xl sm:gap-10 sm:p-8 lg:grid-cols-[.95fr_1.05fr] lg:p-12">
-      <div>
-        <h1 class="hero-line max-w-3xl text-balance text-[clamp(2.5rem,6.8vw,5.9rem)] font-black leading-[.92] tracking-[0]" data-i18n="hero.title">
+    <div class="relative grid items-center gap-8 overflow-hidden rounded-[2rem] border border-white/[.08] bg-white/[.035] p-5 shadow-[0_30px_100px_rgba(0,0,0,.42)] backdrop-blur-xl sm:gap-10 sm:p-8 lg:grid-cols-[.95fr_1.05fr] lg:p-12">
+      <LightRays class="z-0 opacity-95" count={9} color="rgba(255, 92, 92, 0.42)" blur={34} speed={16} length="82%" />
+      <div class="relative z-10">
+        <h1 class="hero-line max-w-3xl text-balance text-[clamp(1.75rem,4.76vw,4.13rem)] font-black leading-[.92] tracking-[0]" data-i18n="hero.title">
         Soluções tecnológicas para empresas em Moçambique
         </h1>
         <p class="hero-line mt-7 max-w-2xl text-lg leading-8 text-mist sm:text-xl" data-i18n="hero.copy">
@@ -30,7 +35,7 @@
         </div>
       </div>
 
-      <div class="hero-line relative min-h-[390px] sm:min-h-[560px]">
+      <div class="hero-line relative z-10 min-h-[390px] sm:min-h-[560px]">
         <div class="absolute right-0 top-0 h-24 w-24 rounded-full border border-izired/30"></div>
         <div class="absolute left-8 top-16 hidden h-5 w-5 rotate-45 border border-white/25 sm:block"></div>
         <div class="absolute bottom-10 right-16 hidden h-4 w-4 rounded-full bg-izired shadow-[0_0_28px_rgba(204,0,0,.75)] sm:block"></div>
@@ -60,7 +65,7 @@
 
     <div class="mt-4 grid gap-3 sm:grid-cols-3">
       {["hero.metric1", "hero.metric2", "hero.metric3"].map((key) => (
-        <div class="reveal rounded-2xl border border-line bg-white/[.035] p-4 text-sm font-bold text-mist" data-i18n={key}>{key}</div>
+        <div class="reveal magic-card rounded-2xl border border-line bg-white/[.035] p-4 text-sm font-bold text-mist" data-i18n={key}>{key}</div>
       ))}
     </div>
   </div>

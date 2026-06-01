@@ -1,0 +1,120 @@
+---
+const clients = [
+  ["Proimagem", "/images/clients/proimagem.png"],
+  ["Condomínio das Dores", "/images/clients/condominio-das-dores.png"],
+  ["AGC", "/images/clients/agc.png"],
+  ["Engine Service", "/images/clients/engine-service.png"],
+  ["Pro Services & Trading", "/images/clients/pro-services-trading.png"],
+  ["Focus Media", "/images/clients/focus-media.png"],
+  ["HCVL Advogados", "/images/clients/hcvl-advogados.png"],
+  ["CK Advogados", "/images/clients/ck-advogados.png"],
+  ["Miniarte", "/images/clients/miniarte.png"],
+  ["Mussiro Investments", "/images/clients/mussiro-investments.png"],
+  ["SB Holdings", "/images/clients/sb-holdings.png"],
+  ["AM Fermino", "/images/clients/am-fermino.png"],
+  ["GROAC", "/images/clients/groac.png"],
+  ["Vest Group", "/images/clients/vest-group.png"],
+  ["Conexões Serviços", "/images/clients/conexoes-servicos.png"],
+  ["Imperial Crown Logistics Mozambique", "/images/clients/imperial-crown-logistics-mozambique.png"],
+  ["Gold Flavor", "/images/clients/gold-flavor.png"],
+  ["Ladys Nail", "/images/clients/ladys-nail.png"],
+  ["Fade Master", "/images/clients/fade-master.png"],
+  ["PATFER", "/images/clients/patfer.png"],
+  ["River Lodge", "/images/clients/river-lodge.png"],
+  ["Espaço Quinas", "/images/clients/espaco-quinas.png"],
+  ["MBS Catering", "/images/clients/mbs-catering.png"],
+  ["MBS Delivery", "/images/clients/mbs-delivery.png"],
+  ["HR Lab", "/images/clients/hr-lab.png"],
+  ["MARINE MAXXPROTECT", "/images/clients/marine-maxxprotect.png"],
+  ["Benvinda Multi Services", "/images/clients/benvinda-multi-services.png"],
+  ["Jazz Bar", "/images/clients/jazz-bar.png"],
+  ["Great Logistics", "/images/clients/great-logistics.png"],
+  ["Marios Bar", "/images/clients/marios-bar.png"]
+];
+
+const marqueeClients = [...clients, ...clients];
+---
+
+<section id="clients" class="section-pad border-y border-line bg-[#050505]">
+  <div class="container-premium">
+    <div class="reveal max-w-3xl">
+      <span class="text-sm font-black uppercase tracking-[.22em] text-izired" data-pt="Clientes" data-en="Clients">Clientes</span>
+      <h2
+        class="mt-4 text-balance text-4xl font-black leading-tight sm:text-5xl"
+        data-pt="Marcas que acompanham a nossa trajectória"
+        data-en="Brands that follow our journey"
+      >
+        Marcas que acompanham a nossa trajectória
+      </h2>
+      <p
+        class="mt-5 text-lg leading-8 text-muted"
+        data-pt="Clientes recentes e recorrentes no nosso portfólio de branding, design, presença digital e soluções tecnológicas."
+        data-en="Recent and recurring clients in our branding, design, digital presence, and technology solutions portfolio."
+      >
+        Clientes recentes e recorrentes no nosso portfólio de branding, design, presença digital e soluções tecnológicas.
+      </p>
+    </div>
+
+    <div class="clients-marquee reveal mt-12" aria-label="Clientes recorrentes da IZITech">
+      <div class="clients-marquee-track">
+        {marqueeClients.map(([name, logo], index) => (
+          <article
+            class="premium-card magic-card group flex min-h-36 w-[260px] shrink-0 items-center justify-center p-4 transition duration-300 hover:-translate-y-1 hover:border-izired/50 sm:w-[282px]"
+            aria-hidden={index >= clients.length ? "true" : undefined}
+          >
+            <div class="grid h-24 w-full place-items-center rounded-2xl border border-black/10 bg-[#f5f5f5] px-5 shadow-inner shadow-black/10">
+              <img
+                class="max-h-16 w-full object-contain transition duration-300 group-hover:scale-[1.03]"
+                src={logo}
+                alt={index >= clients.length ? "" : `Logotipo ${name}`}
+                loading="lazy"
+                width="220"
+                height="88"
+              />
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .clients-marquee {
+    overflow: hidden;
+    mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  }
+
+  .clients-marquee-track {
+    display: flex;
+    width: max-content;
+    gap: 1rem;
+    animation: izitech-clients-marquee 78s linear infinite;
+    will-change: transform;
+  }
+
+  .clients-marquee:hover .clients-marquee-track {
+    animation-play-state: paused;
+  }
+
+  @keyframes izitech-clients-marquee {
+    from {
+      transform: translateX(0);
+    }
+
+    to {
+      transform: translateX(calc(-50% - .5rem));
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .clients-marquee {
+      overflow-x: auto;
+      mask-image: none;
+    }
+
+    .clients-marquee-track {
+      animation: none;
+    }
+  }
+</style>

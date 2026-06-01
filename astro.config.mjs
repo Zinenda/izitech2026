@@ -4,7 +4,7 @@ import sitemap from "@astrojs/sitemap";
 import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
-  site: "https://izitech.co.mz",
+  site: "https://izitech.co",
   output: "static",
   adapter: netlify(),
   integrations: [sitemap()],
